@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Style for the container div */
+    .video-container {
+      position: relative;
+      max-width: 30%;
+      overflow: hidden;
+    }
+
+    /* Style for the video element */
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Style for the text overlay */
+    .text-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #000;
+      font-size: 24px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      z-index: 1;
+    }
+
+    /* Style for fullscreen mode */
+    .fullscreen .text-overlay {
+      font-size: 36px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="video-container" id="videoContainer">
+    <video controls id="video">
+      <source src="reactjs setup.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Text overlay -->
+    <div class="text-overlay">
+      Your Text Here
+    </div>
+  </div>
+
+  <script>
+    var video = document.getElementById('video');
+    var videoContainer = document.getElementById('videoContainer');
+
+    // Listen for fullscreen change events
+    video.addEventListener('fullscreenchange', function () {
+      if (document.fullscreenElement) {
+        videoContainer.classList.add('fullscreen');
+      } else {
+        videoContainer.classList.remove('fullscreen');
+      }
+    });
+
+    // Toggle fullscreen on video click
+    video.addEventListener('click', function () {
+      if (!document.fullscreenElement) {
+        video.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    });
+  </script>
+
+</body>
+</html>
